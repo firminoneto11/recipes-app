@@ -13,7 +13,7 @@ class RecipesViewSet(Gen):
     def get_recipe(self, req: Request, recipe_id: int):
         pass
 
-    def update_recipe(self, recipe_id: int):
+    def update_recipe(self, req: Request, recipe_id: int):
         pass
 
     def delete_recipe(self, req: Request, recipe_id: int):
