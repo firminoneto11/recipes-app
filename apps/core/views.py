@@ -1,9 +1,15 @@
 # from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.viewsets import GenericViewSet as Gen
+from .serializers import RecipeSerializer
+from .models import Recipe
 
 
 class RecipesViewSet(Gen):
+
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
+
     def list_recipes(self, req: Request):
         pass
 
