@@ -1,4 +1,4 @@
-# from rest_framework.response import Response
+from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.viewsets import GenericViewSet as Gen
 from .serializers import RecipeSerializer
@@ -10,11 +10,12 @@ class RecipesViewSet(Gen):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
 
-    def list_recipes(self, req: Request):
-        pass
-
     def create_recipe(self, req: Request):
         pass
+
+    def list_recipes(self, req: Request):
+        serialized_data = self.get_serializer(instance=self.get_queryset(), many=True).data
+        return Response(data=serialized_data, status=200)
 
     def get_recipe(self, req: Request, recipe_id: int):
         pass
