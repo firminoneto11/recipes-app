@@ -11,7 +11,10 @@ class RecipesViewSet(Gen):
     serializer_class = RecipeSerializer
 
     def create_recipe(self, req: Request):
-        pass
+        serialized_object: RecipeSerializer = self.get_serializer(data=req.data)
+        serialized_object.is_valid(raise_exception=True)
+        serialized_object.save()
+        return Response(data=serialized_object.data, status=201)
 
     def list_recipes(self, req: Request):
         serialized_data = self.get_serializer(instance=self.get_queryset(), many=True).data
