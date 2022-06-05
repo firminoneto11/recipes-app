@@ -3,3 +3,4 @@ POSTGRES_DB=Your db name
 POSTGRES_USER=Your db user
 POSTGRES_PASSWORD=Your db password
 ALLOWED_HOST=Your host address
+CORS_ORIGIN=Your frontend address

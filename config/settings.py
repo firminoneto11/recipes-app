@@ -17,7 +17,7 @@ if DEBUG:
     ALLOWED_HOSTS = ["*"]
 else:
     ALLOWED_HOSTS = [get_env("ALLOWED_HOST")]
-    CORS_ALLOWED_ORIGINS = []
+    CORS_ALLOWED_ORIGINS = [get_env("CORS_ORIGIN")]
 
 # Application definition
 
