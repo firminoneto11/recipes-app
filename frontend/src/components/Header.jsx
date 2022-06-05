@@ -1,8 +1,9 @@
 import { Box, Container, Typography, Stack, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import SearchField from './SearchField';
 
 
-export default function Header({ openModal }) {
+export default function Header({ openModal, setData, axios, getRecipes }) {
 
     return (
         <Box sx={{
@@ -19,6 +20,9 @@ export default function Header({ openModal }) {
                 </Typography>
                 <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
                     <Button onClick={() => openModal()} variant="contained" startIcon={<AddIcon />}>Add new recipe</Button>
+                </Stack>
+                <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
+                    <SearchField setData={setData} axios={axios} getRecipes={getRecipes} />
                 </Stack>
             </Container>
         </Box>

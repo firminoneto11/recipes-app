@@ -31,6 +31,7 @@ export default function RecipeCard({ recipe, axios, remove, idx }) {
     const deleteHandler = (id) => {
         Swal.fire({
             title: `Do you want to delete '${recipe.title}'?`,
+            text: "If you delete it, you won't be able to see it again!",
             showDenyButton: true,
             confirmButtonText: 'Yes',
             denyButtonText: `No`,

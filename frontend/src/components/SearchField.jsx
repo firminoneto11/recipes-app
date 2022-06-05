@@ -1,29 +1,44 @@
-import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
 
-export default function CustomizedInputBase() {
+
+export default function SearchField({ setData, axios, getRecipes }) {
+
+    const fetchRecipe = async (id) => {
+        try {
+            var response = await axios.get(`recipe/${id}/`);
+        }
+        catch (error) {
+            console.log(error);
+            const status = error.response.status;
+            if (status === 404) {
+                setData([]);
+            }
+            return;
+        }
+        if (response.status === 200) {
+            setData([response.data]);
+        }
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const recipe = event.target.recipe.value;
+        if (!recipe) {
+            await getRecipes();
+            return;
+        }
+        await fetchRecipe(recipe);
+    }
+
     return (
-        <Paper component="form" sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}>
-            <IconButton sx={{ p: '10px' }} aria-label="menu">
-                <MenuIcon />
-            </IconButton>
-            <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Search Google Maps"
-                inputProps={{ 'aria-label': 'search google maps' }}
-            />
-            <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+        <Paper autoComplete='off' onSubmit={handleSubmit} component="form"
+            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}>
+            <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search for a recipe by it's id" name='recipe' />
+            <IconButton type="submit" sx={{ p: '10px' }}>
                 <SearchIcon />
-            </IconButton>
-            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-            <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
-                <DirectionsIcon />
             </IconButton>
         </Paper>
     );

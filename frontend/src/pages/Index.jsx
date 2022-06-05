@@ -33,6 +33,10 @@ export default function Index() {
         catch (error) {
             console.log(error);
             setIsLoading(false);
+            const status = error.response.status;
+            if (status === 404) {
+                setData([]);
+            }
             return;
         }
         setIsLoading(false);
@@ -72,7 +76,7 @@ export default function Index() {
                 <RecipeForm handleClose={handleClose} axios={axios} setData={setData} />
             </TransitionsModal>
             <MenuBar />
-            <Header openModal={handleOpen} />
+            <Header openModal={handleOpen} setData={setData} axios={axios} getRecipes={getRecipes} />
             <main>
                 <Container sx={{ py: 8 }} maxWidth="md">
 
@@ -87,7 +91,7 @@ export default function Index() {
                     {noData && (
                         <CenteredElements>
                             <Typography variant='h6'>
-                                No recipes found, but feel free to create some!
+                                No recipes found :(
                             </Typography>
                         </CenteredElements>
                     )}
