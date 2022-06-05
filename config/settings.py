@@ -12,7 +12,12 @@ SECRET_KEY = get_env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = get_env("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = []
+    CORS_ALLOWED_ORIGINS = []
 
 # Application definition
 
@@ -27,6 +32,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "corsheaders",
 ]
 
 LOCAL_APPS = [
@@ -37,6 +43,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -94,6 +101,13 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+# DRF
+
+REST_FRAMEWORK = {
+    # API Data Renderers
+    "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
+}
 
 
 # Internationalization

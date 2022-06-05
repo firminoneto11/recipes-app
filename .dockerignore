@@ -7,3 +7,5 @@ __pycache__
 .github
 .idea
 .vscode
+frontend
+frontend/node_modules
