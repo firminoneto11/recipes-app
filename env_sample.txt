@@ -1,0 +1,7 @@
+SECRET_KEY=Your key
+DEBUG=True or False
+POSTGRES_DB=Your db name
+POSTGRES_USER=Your db user
+POSTGRES_PASSWORD=Your db password
+PORT=Some port
+HOST=Your host

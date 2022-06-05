@@ -1,0 +1,4 @@
+SECRET_KEY=Your key
+POSTGRES_DB=Your db name
+POSTGRES_USER=Your db user
+POSTGRES_PASSWORD=Your db password

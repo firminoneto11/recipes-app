@@ -3,13 +3,18 @@ version: '3'
 services:
   db:
     image: postgres:13
-    restart: always
     volumes:
       - db_data:/var/lib/postgresql/data
-    ports:
-      - 5400:5432
     env_file:
-      - ./.env
+      - ./db_env.env
+  app:
+    build: .
+    env_file:
+      - ./django_env.env
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
 
 volumes:
   db_data:

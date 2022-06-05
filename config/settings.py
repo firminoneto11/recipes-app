@@ -73,8 +73,8 @@ DATABASES = {
         "NAME": get_env("POSTGRES_DB"),
         "USER": get_env("POSTGRES_USER"),
         "PASSWORD": get_env("POSTGRES_PASSWORD"),
-        "HOST": get_env("HOST"),
-        "PORT": get_env("PORT"),
+        "HOST": get_env("HOST", default="db"),
+        "PORT": get_env("PORT", default="5432"),
     }
 }
 
