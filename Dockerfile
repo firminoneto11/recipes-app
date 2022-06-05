@@ -34,7 +34,7 @@ RUN poetry install --no-dev --no-interaction
 
 COPY docker-entrypoint.sh .
 
-RUN chmod +x ./docker-entrypoint.sh
+RUN chmod +x /recipes-app/docker-entrypoint.sh
 
 EXPOSE 8000
 
