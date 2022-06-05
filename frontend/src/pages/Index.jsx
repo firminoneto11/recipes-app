@@ -17,13 +17,18 @@ export default function Index() {
     const [data, setData] = useState([]);
 
     const [open, setOpen] = useState(false);
+    const [modalData, setModalData] = useState(null);
 
-    const handleOpen = () => {
+    const handleOpen = (recipeData) => {
         setOpen(true);
+        if (recipeData) {
+            setModalData(recipeData);
+        }
     };
 
     const handleClose = () => {
         setOpen(false);
+        setTimeout(() => setModalData(null), 150);
     };
 
     const getRecipes = async () => {
@@ -33,10 +38,7 @@ export default function Index() {
         catch (error) {
             console.log(error);
             setIsLoading(false);
-            const status = error.response.status;
-            if (status === 404) {
-                setData([]);
-            }
+            setData([]);
             return;
         }
         setIsLoading(false);
@@ -73,7 +75,7 @@ export default function Index() {
     return (
         <Fragment>
             <TransitionsModal open={open} handleOpen={handleOpen} handleClose={handleClose}>
-                <RecipeForm handleClose={handleClose} axios={axios} setData={setData} />
+                <RecipeForm handleClose={handleClose} axios={axios} setData={setData} modalData={modalData} />
             </TransitionsModal>
             <MenuBar />
             <Header openModal={handleOpen} setData={setData} axios={axios} getRecipes={getRecipes} />
@@ -100,7 +102,8 @@ export default function Index() {
                     {hasData && (
                         <Grid container spacing={4}>
                             {data.map((el, idx) => (
-                                <RecipeCard key={idx} idx={idx} recipe={el} axios={axios} remove={removeRecipeFromDom} />
+                                <RecipeCard key={idx} idx={idx} recipe={el} axios={axios} remove={removeRecipeFromDom}
+                                    openModal={handleOpen} />
                             ))}
                         </Grid>
                     )}

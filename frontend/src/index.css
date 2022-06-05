@@ -2,3 +2,7 @@
     margin: 0;
     padding: 0;
 }
+
+.swal2-container {
+    z-index: 9999;
+}

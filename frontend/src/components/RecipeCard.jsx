@@ -8,7 +8,11 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 
 
-export default function RecipeCard({ recipe, axios, remove, idx }) {
+export default function RecipeCard({ recipe, axios, remove, idx, openModal }) {
+
+    const updateHandler = (recipe) => {
+        openModal(recipe);
+    }
 
     const deleteRecipe = async (id) => {
         try {
@@ -58,7 +62,8 @@ export default function RecipeCard({ recipe, axios, remove, idx }) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" startIcon={<EditIcon />}>Edit</Button>
+                    <Button size="small" startIcon={<EditIcon />}
+                        onClick={() => updateHandler({ title: recipe.title, text: recipe.text, id: recipe.id })}>Edit</Button>
                     <Button onClick={() => deleteHandler(recipe.id)} size="small" startIcon={<DeleteIcon />}>Delete</Button>
                 </CardActions>
             </Card>
