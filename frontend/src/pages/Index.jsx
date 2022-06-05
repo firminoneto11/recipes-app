@@ -69,7 +69,7 @@ export default function Index() {
     return (
         <Fragment>
             <TransitionsModal open={open} handleOpen={handleOpen} handleClose={handleClose}>
-                <RecipeForm handleClose={handleClose} />
+                <RecipeForm handleClose={handleClose} axios={axios} setData={setData} />
             </TransitionsModal>
             <MenuBar />
             <Header openModal={handleOpen} />
