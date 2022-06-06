@@ -40,4 +40,4 @@ EXPOSE 8000
 
 COPY . .
 
-ENTRYPOINT [ "/recipes-app/docker-entrypoint.sh" ]
+ENTRYPOINT [ "sh", "/recipes-app/docker-entrypoint.sh" ]
